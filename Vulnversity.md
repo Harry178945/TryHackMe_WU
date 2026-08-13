@@ -13,10 +13,10 @@ We notice that **HTTP** is open on port **3333**. In the browser, we will enter:
 We will try to explore the different possible paths: </br>
 ```bash
 ffuf -u "http://10.129.185.32:3333/FUZZ" -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt -H "User-Agent: Firefox" -fc 403
-``` 
+```
 </br>
-![](assets/ffuf.png) </br>
 
+![](assets/ffuf.png)
 </br>
 </br>
 
@@ -26,16 +26,21 @@ We then type the endpoint at the URL:
 ```http://[ip]:3333/internal``` </br>
 
 ![](assets/upload.png) </br>
+</br>
+</br>
 
 Great, we have the option to upload a file. Let's see what types of files are allowed. </br>
 For that, we'll bring out our good old friend Burp: <br>
 
-![](assets/burp.png) </br>
-
+![](assets/burp.png)
+</br>
+</br>
 
 After a quick brute-force attack with burp, we see that our upload endpoint accepts **.phtml** files. We then rename our ```shell.php``` file to ```shell.phtml```. </br>
 
-![](assets/phtml.png) </br>
+![](assets/phtml.png)
+</br>
+</br>
 
 
 The shell.phtml file is a PHP reverse shell file. </br>
