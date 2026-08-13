@@ -1,7 +1,9 @@
 # Room Bounty Hacker
 ## You talked a big game about being the most elite hacker in the solar system. Prove it and claim your right to the status of Elite Bounty Hacker!
 
-### Recon Phase </br>
+### Recon Phase 
+</br>
+
 ```bash
 nmap -sV -A -p- [ip]
 ```
@@ -42,6 +44,10 @@ Service Info: OSs: Unix, Linux; CPE: cpe:/o:linux:linux_kernel
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 39.37 seconds
 ````
+
+</br>
+</br>
+
 ### Exploitation
 
 </br>
@@ -76,9 +82,12 @@ Whoaahh we have the ssh password.
 
 GG, we're connected to the machine and we're doing a ```cat user.txt```
 
-### Privilege Escalation
+</br>
 </br>
 
+### Privilege Escalation
+
+</br>
 Let's execute the ```sudo -l``` command <br>
 
 ```bash
