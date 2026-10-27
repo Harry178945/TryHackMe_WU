@@ -65,8 +65,6 @@ Blockbuster1     (?)
 
 > Equivalent with Hashcat: `hashcat -m 1000 mrealman.txt /usr/share/wordlists/rockyou.txt`
 
-![Password cracking](assets/task_2.png)
-
 ---
 
 ## Step 3 — Extracting NTLM Parameters from the PCAP
@@ -86,8 +84,6 @@ Locate the `Session Setup Request` / `NTLMSSP_AUTH` packet for `WORKGROUP\mrealm
 | Session ID | `0x0000100000000041` |
 | NTProofStr | `16e816dead16d4ca7d5d6dee4a015c14` |
 | Encrypted Session Key | `fde53b54cb676b9bbf0fb1fbef384698` |
-
-![NTLM parameters in Wireshark](assets/task_2.1.png)
 
 ---
 
